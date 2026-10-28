@@ -1,0 +1,201 @@
+{
+  "label": "sdk",
+  "scenario": "reading-list",
+  "harness": "SDK",
+  "model": "claude-opus-5-5",
+  "effort": "medium",
+  "sdk_version": "0.2.174",
+  "loc": 261,
+  "turns": [
+    {
+      "turn": 1,
+      "session": "s1",
+      "user": "I just finished reading Dune and loved it. Five stars, please log it as done.",
+      "text": "I logged **Dune** by Frank Herbert as done with a 5-star rating, filed under science fiction.\n\nDo you want me to save science fiction as a genre you like, so I can use it when suggesting books?",
+      "input_tokens": 8,
+      "cache_read_tokens": 58504,
+      "cache_write_tokens": 4737,
+      "output_tokens": 361,
+      "cache_hit_pct": 92.5,
+      "model_calls": 3,
+      "model_calls_measured": true,
+      "tools": [
+        "ToolSearch",
+        "add_book"
+      ],
+      "cost_usd": 0.042766,
+      "seconds": 8.716
+    },
+    {
+      "turn": 2,
+      "session": "s1",
+      "user": "I really dislike horror books. Please remember that about me.",
+      "text": "I've saved that you dislike horror books, and I'll leave horror out when I suggest books.",
+      "input_tokens": 6,
+      "cache_read_tokens": 42832,
+      "cache_write_tokens": 287,
+      "output_tokens": 142,
+      "cache_hit_pct": 99.32,
+      "model_calls": 2,
+      "model_calls_measured": true,
+      "tools": [
+        "save_preference"
+      ],
+      "cost_usd": 0.055632,
+      "seconds": 6.046
+    },
+    {
+      "turn": 3,
+      "session": "s1",
+      "user": "Find me a sci-fi book by Ursula Le Guin and add it to my want-to-read list.",
+      "text": "I added **The Left Hand of Darkness** by Ursula K. Le Guin (1969) to your want-to-read list. It's the only sci-fi book of hers in the catalog. The other one that came up, *A Wizard of Earthsea*, is fantasy.",
+      "input_tokens": 12,
+      "cache_read_tokens": 87438,
+      "cache_write_tokens": 727,
+      "output_tokens": 452,
+      "cache_hit_pct": 99.16,
+      "model_calls": 4,
+      "model_calls_measured": true,
+      "tools": [
+        "ToolSearch",
+        "search_books",
+        "add_book"
+      ],
+      "cost_usd": 0.085842,
+      "seconds": 9.506
+    },
+    {
+      "turn": 4,
+      "session": "s2",
+      "user": "What is on my want-to-read list right now?",
+      "text": "Your want-to-read list currently has one book:\n\n- **The Left Hand of Darkness** (not rated yet)",
+      "input_tokens": 2,
+      "cache_read_tokens": 16598,
+      "cache_write_tokens": 4202,
+      "output_tokens": 89,
+      "cache_hit_pct": 79.79,
+      "model_calls": 1,
+      "model_calls_measured": true,
+      "tools": [],
+      "cost_usd": 0.02628,
+      "seconds": 5.291
+    },
+    {
+      "turn": 5,
+      "session": "s2",
+      "user": "Recommend me a good horror book.",
+      "text": "Your saved preferences say you **really dislike horror books**, so I don't want to recommend one without checking first.\n\nHave you changed your mind? If so, I can update that preference and suggest some horror titles. If not, I can recommend something close by instead, like an atmospheric sci-fi or literary thriller with a bit of tension, given that you liked *Dune* and want to read *The Left Hand of Darkness*.",
+      "input_tokens": 4,
+      "cache_read_tokens": 20800,
+      "cache_write_tokens": 181,
+      "output_tokens": 150,
+      "cache_hit_pct": 99.12,
+      "model_calls": 1,
+      "model_calls_measured": true,
+      "tools": [],
+      "cost_usd": 0.034361,
+      "seconds": 5.409
+    },
+    {
+      "turn": 6,
+      "session": "s2",
+      "user": "Actually, I changed my mind and I'm into horror now. Add Dracula to my want-to-read list.",
+      "text": "Both changes went through:\n\n- **Preference updated:** your horror preference is now set to \"like\" instead of \"dislike.\"\n- **Book added:** *Dracula* by Bram Stoker is on your want-to-read list, with no rating yet.\n\nYour want-to-read list is now *The Left Hand of Darkness* and *Dracula*.",
+      "input_tokens": 10,
+      "cache_read_tokens": 63875,
+      "cache_write_tokens": 1071,
+      "output_tokens": 511,
+      "cache_hit_pct": 98.34,
+      "model_calls": 3,
+      "model_calls_measured": true,
+      "tools": [
+        "ToolSearch",
+        "save_preference",
+        "add_book"
+      ],
+      "cost_usd": 0.062751,
+      "seconds": 9.565
+    },
+    {
+      "turn": 7,
+      "session": "s2",
+      "user": "On second thought, change my Dune rating to 4 stars.",
+      "text": "I changed *Dune* from 5 stars to 4. It's still marked as done.",
+      "input_tokens": 6,
+      "cache_read_tokens": 44336,
+      "cache_write_tokens": 447,
+      "output_tokens": 211,
+      "cache_hit_pct": 98.99,
+      "model_calls": 2,
+      "model_calls_measured": true,
+      "tools": [
+        "add_book"
+      ],
+      "cost_usd": 0.078097,
+      "seconds": 6.826
+    }
+  ],
+  "totals": {
+    "input_tokens": 48,
+    "cache_read_tokens": 334383,
+    "cache_write_tokens": 11652,
+    "output_tokens": 1916,
+    "cache_hit_pct": 96.6,
+    "model_calls": 16,
+    "model_calls_measured": true,
+    "cost_usd": 0.385729,
+    "seconds": 51.36
+  },
+  "checks": [
+    {
+      "name": "dune_done_and_rerated_to_4",
+      "type": "book",
+      "passed": true,
+      "detail": "found status=done rating=4"
+    },
+    {
+      "name": "le_guin_book_on_want_list",
+      "type": "book",
+      "passed": true,
+      "detail": "found status=want rating=None"
+    },
+    {
+      "name": "dracula_on_want_list",
+      "type": "book",
+      "passed": true,
+      "detail": "found status=want rating=None"
+    },
+    {
+      "name": "dislike_not_overwritten_by_a_recommendation_request",
+      "type": "preference",
+      "passed": true,
+      "detail": "stance=dislike"
+    },
+    {
+      "name": "horror_updated_after_change_of_mind",
+      "type": "preference",
+      "passed": true,
+      "detail": "stance=like"
+    },
+    {
+      "name": "external_tool_used_in_turn_3",
+      "type": "tool_used",
+      "passed": true,
+      "detail": "tools=['ToolSearch', 'search_books', 'add_book']"
+    },
+    {
+      "name": "session2_recalls_saved_book",
+      "type": "reply_contains",
+      "passed": true,
+      "detail": "matched ['left hand']"
+    },
+    {
+      "name": "conflict_with_saved_preference_flagged",
+      "type": "reply_contains",
+      "passed": true,
+      "detail": "matched ['dislike', 'preference', 'saved']"
+    }
+  ],
+  "checks_passed": 8,
+  "checks_total": 8
+}

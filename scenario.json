@@ -1,0 +1,33 @@
+{
+  "name": "reading-list",
+  "sessions": [
+    {
+      "id": "s1",
+      "turns": [
+        "I just finished reading Dune and loved it. Five stars, please log it as done.",
+        "I really dislike horror books. Please remember that about me.",
+        "Find me a sci-fi book by Ursula Le Guin and add it to my want-to-read list."
+      ]
+    },
+    {
+      "id": "s2",
+      "turns": [
+        "What is on my want-to-read list right now?",
+        "Recommend me a good horror book.",
+        "Actually, I changed my mind and I'm into horror now. Add Dracula to my want-to-read list.",
+        "On second thought, change my Dune rating to 4 stars."
+      ]
+    }
+  ],
+  "checks": [
+    {"name": "dune_done_and_rerated_to_4", "type": "book", "title": "Dune", "status": "done", "rating": 4},
+    {"name": "le_guin_book_on_want_list", "type": "book","title": "The Left Hand of Darkness", "status": "want"},
+    {"name": "dracula_on_want_list", "type": "book", "title": "Dracula", "status": "want"},
+    {"name": "dislike_not_overwritten_by_a_recommendation_request", "type": "preference", "topic": "horror", "stance": "dislike", "after_turn": 5},
+    {"name": "horror_updated_after_change_of_mind", "type": "preference", "topic": "horror", "stance": "like"},
+    {"name": "external_tool_used_in_turn_3", "type": "tool_used", "tool": "search_books", "turn": 3},
+    {"name": "session2_recalls_saved_book", "type": "reply_contains", "turn": 4, "any": ["left hand"]},
+    {"name": "conflict_with_saved_preference_flagged", "type": "reply_contains", "turn": 5,
+     "any": ["dislike", "don't like", "not a fan", "mentioned", "told me", "earlier", "you said", "preference", "saved"]}
+  ]
+}

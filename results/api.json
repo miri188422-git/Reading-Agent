@@ -1,0 +1,206 @@
+{
+  "label": "api",
+  "scenario": "reading-list",
+  "harness": "API",
+  "model": "claude-opus-5-5",
+  "effort": "medium",
+  "libraries": {
+    "anthropic": "2.3.0"
+  },
+  "harness_loc": {
+    "__init__": 3,
+    "caching": 25,
+    "compaction": 45,
+    "context": 43,
+    "history": 66,
+    "loop": 51,
+    "memory": 46,
+    "tokens": 55,
+    "tools": 94,
+    "total": 428
+  },
+  "turns": [
+    {
+      "turn": 1,
+      "session": "s1",
+      "user": "I just finished reading Dune and loved it. Five stars, please log it as done.",
+      "text": "I added *Dune* by Frank Herbert to your list as done, with 5 stars. Would you like recommendations for more science fiction like it?",
+      "input_tokens": 6,
+      "cache_read_tokens": 2316,
+      "cache_write_tokens": 247,
+      "output_tokens": 263,
+      "cache_hit_pct": 90.2,
+      "model_calls": 2,
+      "tools": [
+        "add_book"
+      ],
+      "cost_usd": 0.006982,
+      "seconds": 4.51
+    },
+    {
+      "turn": 2,
+      "session": "s1",
+      "user": "I really dislike horror books. Please remember that about me.",
+      "text": "Got it. I've saved that you dislike horror books, and I'll leave them out of future recommendations.",
+      "input_tokens": 6,
+      "cache_read_tokens": 2421,
+      "cache_write_tokens": 495,
+      "output_tokens": 145,
+      "cache_hit_pct": 82.9,
+      "model_calls": 2,
+      "tools": [
+        "save_preference"
+      ],
+      "cost_usd": 0.005883,
+      "seconds": 3.23
+    },
+    {
+      "turn": 3,
+      "session": "s1",
+      "user": "Find me a sci-fi book by Ursula Le Guin and add it to my want-to-read list.",
+      "text": "I added *The Left Hand of Darkness* by Ursula K. Le Guin (1969) to your want-to-read list. It's her classic science fiction novel about a planet where people have no fixed gender.",
+      "input_tokens": 8,
+      "cache_read_tokens": 4344,
+      "cache_write_tokens": 890,
+      "output_tokens": 303,
+      "cache_hit_pct": 82.9,
+      "model_calls": 3,
+      "tools": [
+        "search_books",
+        "add_book"
+      ],
+      "cost_usd": 0.011411,
+      "seconds": 5.88
+    },
+    {
+      "turn": 4,
+      "session": "s2",
+      "user": "What is on my want-to-read list right now?",
+      "text": "You have one book on your want-to-read list right now: **The Left Hand of Darkness** by Ursula K. Le Guin, a science fiction novel.",
+      "input_tokens": 6,
+      "cache_read_tokens": 2168,
+      "cache_write_tokens": 212,
+      "output_tokens": 108,
+      "cache_hit_pct": 90.9,
+      "model_calls": 2,
+      "tools": [
+        "list_books"
+      ],
+      "cost_usd": 0.003678,
+      "seconds": 2.31
+    },
+    {
+      "turn": 5,
+      "session": "s2",
+      "user": "Recommend me a good horror book.",
+      "text": "I've got a note that you really dislike horror books, so I wanted to check before suggesting one. Should I recommend a horror book anyway, or update your preference first? Or I could suggest something nearby, like a dark thriller or a gothic mystery.",
+      "input_tokens": 4,
+      "cache_read_tokens": 1022,
+      "cache_write_tokens": 298,
+      "output_tokens": 133,
+      "cache_hit_pct": 77.2,
+      "model_calls": 1,
+      "tools": [],
+      "cost_usd": 0.00437,
+      "seconds": 2.27
+    },
+    {
+      "turn": 6,
+      "session": "s2",
+      "user": "Actually, I changed my mind and I'm into horror now. Add Dracula to my want-to-read list.",
+      "text": "I've changed your saved preference so it now says you like horror, and added **Dracula** by Bram Stoker to your want-to-read list. Would you like more horror recommendations?",
+      "input_tokens": 6,
+      "cache_read_tokens": 2458,
+      "cache_write_tokens": 784,
+      "output_tokens": 376,
+      "cache_hit_pct": 75.7,
+      "model_calls": 2,
+      "tools": [
+        "save_preference",
+        "add_book"
+      ],
+      "cost_usd": 0.011956,
+      "seconds": 5.92
+    },
+    {
+      "turn": 7,
+      "session": "s2",
+      "user": "On second thought, change my Dune rating to 4 stars.",
+      "text": "I changed your rating for **Dune** from 5 to 4 stars.",
+      "input_tokens": 6,
+      "cache_read_tokens": 2854,
+      "cache_write_tokens": 913,
+      "output_tokens": 96,
+      "cache_hit_pct": 75.6,
+      "model_calls": 2,
+      "tools": [
+        "add_book"
+      ],
+      "cost_usd": 0.00708,
+      "seconds": 3.45
+    }
+  ],
+  "totals": {
+    "input_tokens": 42,
+    "cache_read_tokens": 17583,
+    "cache_write_tokens": 3839,
+    "output_tokens": 1424,
+    "cache_hit_pct": 81.9,
+    "model_calls": 14,
+    "model_calls_measured": true,
+    "cost_usd": 0.05136,
+    "seconds": 27.57
+  },
+  "checks": [
+    {
+      "name": "dune_done_and_rerated_to_4",
+      "type": "book",
+      "passed": true,
+      "detail": "found status=done rating=4"
+    },
+    {
+      "name": "le_guin_book_on_want_list",
+      "type": "book",
+      "passed": true,
+      "detail": "found status=want rating=None"
+    },
+    {
+      "name": "dracula_on_want_list",
+      "type": "book",
+      "passed": true,
+      "detail": "found status=want rating=None"
+    },
+    {
+      "name": "dislike_not_overwritten_by_a_recommendation_request",
+      "type": "preference",
+      "passed": true,
+      "detail": "stance=dislike"
+    },
+    {
+      "name": "horror_updated_after_change_of_mind",
+      "type": "preference",
+      "passed": true,
+      "detail": "stance=like"
+    },
+    {
+      "name": "external_tool_used_in_turn_3",
+      "type": "tool_used",
+      "passed": true,
+      "detail": "tools=['search_books', 'add_book']"
+    },
+    {
+      "name": "session2_recalls_saved_book",
+      "type": "reply_contains",
+      "passed": true,
+      "detail": "matched ['left hand']"
+    },
+    {
+      "name": "conflict_with_saved_preference_flagged",
+      "type": "reply_contains",
+      "passed": true,
+      "detail": "matched ['dislike', 'preference']"
+    }
+  ],
+  "checks_passed": 8,
+  "checks_total": 8
+}
